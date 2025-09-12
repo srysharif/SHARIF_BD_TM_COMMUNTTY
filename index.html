@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>💎 𝐒𝐇𝐀𝐑𝐈𝐅 𝐁𝐃 𝐓𝐌 𝐂𝐎𝐌𝐌𝐔𝐍𝐈𝐓𝐘</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- AD SDK -->
+  <script src='//libtl.com/sdk.js' data-zone='9864861' data-sdk='show_9864861'></script>
+  <style>
+    body {
+      background: linear-gradient(135deg,#0f172a,#1e293b,#0f172a);
+      color:#fff;min-height:100vh;
+      font-weight:bold;font-style:italic;
+    }
+    .glass {background: rgba(255,255,255,0.08);border: 1px solid rgba(255,255,255,0.1);backdrop-filter: blur(12px);border-radius: 16px;box-shadow: 0 4px 20px rgba(0,0,0,0.5);}
+    .tab{display:none}.tab.show{display:block}
+    .glow-text {font-weight:bold;font-style:italic;text-shadow:0 0 5px #0ff,0 0 10px #0ff,0 0 20px #0ff;}
+    .glow-btn {background: linear-gradient(90deg,#ff0080,#7928ca,#2af598);background-size:200% 200%;animation: glow 3s linear infinite;font-weight:bold;font-style:italic;font-size:1.1rem;border-radius:12px;padding:10px}
+    @keyframes glow {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .badge{padding:2px 8px;border-radius:6px;font-size:.8rem;font-weight:bold}
+    .badge.pending{background:#fbbf24;color:#000}
+    .badge.success{background:#4ade80;color:#000}
+    .badge.failed{background:#f87171;color:#000}
+  </style>
+</head>
+<body class="pb-32">
+
+<header class="p-4 text-center glass m-3">
+  <h1 class="text-2xl glow-text">💎 𝐒𝐇𝐀𝐑𝐈𝐅 𝐁𝐃 𝐓𝐌 𝐂𝐎𝐌𝐌𝐔𝐍𝐈𝐓𝐘</h1>
+  <a href="https://t.me/SHARIF_BD_TM_COMMUNTTY" target="_blank" class="text-emerald-400 underline text-sm glow-text">📢 𝐉𝐎𝐈𝐍 𝐂𝐇𝐀𝐍𝐍𝐄𝐋</a>
+</header>
+
+<main class="max-w-xl mx-auto px-3 space-y-4">
+
+  <!-- LOGIN -->
+  <section id="tab-login" class="tab show glass p-4">
+    <h2 class="text-xl glow-text">🔐 𝐋𝐎𝐆𝐈𝐍</h2>
+    <input id="username" class="w-full p-2 mt-2 rounded text-black font-bold italic" placeholder="✍ 𝐄𝐍𝐓𝐄𝐑 𝐔𝐒𝐄𝐑𝐍𝐀𝐌𝐄"/>
+    <button onclick="register()" class="w-full py-2 glow-btn mt-3">🚀 𝐒𝐓𝐀𝐑𝐓</button>
+  </section>
+
+  <!-- HOME -->
+  <section id="tab-home" class="tab glass p-4 text-center">
+    <div class="text-sm glow-text">💰 𝐂𝐔𝐑𝐑𝐄𝐍𝐓 𝐁𝐀𝐋𝐀𝐍𝐂𝐄</div>
+    <div class="text-3xl glow-text"><span id="ui-balance">0.00</span> ৳</div>
+    <div class="text-sm mt-2 glow-text">🎬 𝐓𝐎𝐃𝐀𝐘’𝐒 𝐀𝐃𝐒: <span id="ui-ads">0</span>/<span id="ui-limit">200</span></div>
+    <div id="timerBox" class="text-lg font-bold text-emerald-400 mt-2 hidden glow-text">⏳ <span id="timer">17</span> 𝐒𝐄𝐂</div>
+    <button onclick="watchAd()" class="w-full py-2 mt-3 glow-btn">🎬 𝐖𝐀𝐓𝐂𝐇 𝐀𝐃</button>
+    <button onclick="openTab('withdraw')" class="w-full py-2 bg-green-600 mt-3 rounded glow-text">💳 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖</button>
+    <div class="mt-3 text-sm glow-text">
+      🔗 𝐑𝐄𝐅𝐄𝐑 𝐋𝐈𝐍𝐊:<br/>
+      <span id="refLink" class="text-emerald-400"></span>
+      <button onclick="copyRef()" class="bg-gray-700 px-2 rounded text-xs ml-2">📋 𝐂𝐎𝐏𝐘</button>
+    </div>
+  </section>
+
+  <!-- WITHDRAW -->
+  <section id="tab-withdraw" class="tab glass p-4">
+    <h2 class="text-xl glow-text">💳 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖</h2>
+    <select id="method" class="w-full p-2 mt-2 rounded text-black font-bold italic">
+      <option value="bkash">📱 BKASH (𝐌𝐈𝐍 10)</option>
+      <option value="nagad">📱 NAGAD (𝐌𝐈𝐍 50)</option>
+      <option value="recharge">📱 RECHARGE (𝐌𝐈𝐍 20)</option>
+    </select>
+    <input id="number" class="w-full p-2 mt-2 rounded text-black font-bold italic" placeholder="📞 𝐍𝐔𝐌𝐁𝐄𝐑"/>
+    <input id="amount" type="number" class="w-full p-2 mt-2 rounded text-black font-bold italic" placeholder="💰 𝐀𝐌𝐎𝐔𝐍𝐓"/>
+    <button onclick="withdraw()" class="w-full py-2 bg-blue-600 mt-2 rounded glow-text">📩 𝐒𝐄𝐍𝐃 𝐑𝐄𝐐𝐔𝐄𝐒𝐓</button>
+  </section>
+
+  <!-- HISTORY -->
+  <section id="tab-history" class="tab glass p-4">
+    <h2 class="text-xl glow-text">📜 𝐇𝐈𝐒𝐓𝐎𝐑𝐘</h2>
+    <ul id="withdrawHistory" class="mt-2 space-y-2 text-sm"></ul>
+  </section>
+
+  <!-- ADMIN -->
+  <section id="tab-admin" class="tab glass p-4">
+    <h2 class="text-xl glow-text">⚙ 𝐀𝐃𝐌𝐈𝐍 𝐏𝐀𝐍𝐄𝐋</h2>
+    <input id="adminPass" type="password" class="w-full p-2 mt-2 rounded text-black font-bold italic" placeholder="🔑 𝐀𝐃𝐌𝐈𝐍 𝐏𝐀𝐒𝐒"/>
+    <button onclick="adminLogin()" class="w-full py-2 bg-blue-600 mt-2 rounded glow-text">🔓 𝐋𝐎𝐆𝐈𝐍</button>
+    <div id="adminPanel" class="hidden mt-4 space-y-4">
+      <h3 class="font-semibold glow-text">📩 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐐𝐔𝐄𝐒𝐓𝐒</h3>
+      <ul id="adminRequests" class="mt-2 space-y-2 text-sm"></ul>
+    </div>
+  </section>
+</main>
+
+<!-- NAV -->
+<nav class="fixed bottom-0 left-0 right-0 bg-black/40 backdrop-blur p-2 grid grid-cols-4 gap-2">
+  <button onclick="openTab('home')" class="py-2 rounded bg-white/10 glow-text">🏠</button>
+  <button onclick="openTab('withdraw')" class="py-2 rounded bg-white/10 glow-text">💳</button>
+  <button onclick="openTab('history')" class="py-2 rounded bg-white/10 glow-text">📜</button>
+  <button onclick="openTab('admin')" class="py-2 rounded bg-white/10 glow-text">⚙</button>
+</nav>
+
+<script>
+const BOT_TOKEN = "8345789887:AAFvnBOVceVHBV61Qc4jskMKJpVN3r7-G90";
+const ADMIN_ID = "7170785762";
+const CHANNEL_ID = "-1002626249665";
+const BOT_USERNAME = "SHARIF_BD_TM_COMMUNTTY_BOT";
+
+let user = {};
+let balance = 0;
+let adsToday = 0;
+const limit = 200;
+
+// Load saved
+if(localStorage.user){user=JSON.parse(localStorage.user);}
+if(localStorage.balance) balance=parseFloat(localStorage.balance);
+if(localStorage.adsToday){adsToday=parseInt(localStorage.adsToday);}
+updateUI();
+
+function register(){
+  const name=document.getElementById("username").value.trim();
+  if(!name){alert("⚠ 𝐔𝐒𝐄𝐑𝐍𝐀𝐌𝐄 𝐑𝐄𝐐𝐔𝐈𝐑𝐄𝐃!");return;}
+  user={name,joined:true};
+  localStorage.user=JSON.stringify(user);
+  document.getElementById("refLink").innerText=`https://t.me/${BOT_USERNAME}?start=${name}`;
+  openTab("home");
+}
+
+function copyRef(){
+  const link=document.getElementById("refLink").innerText;
+  navigator.clipboard.writeText(link);
+  alert("✅ 𝐑𝐄𝐅𝐄𝐑 𝐋𝐈𝐍𝐊 𝐂𝐎𝐏𝐈𝐄𝐃!");
+}
+
+function openTab(id){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("show"));
+  document.getElementById("tab-"+id).classList.add("show");
+}
+
+function updateUI(){
+  document.getElementById("ui-balance").innerText=balance.toFixed(2);
+  document.getElementById("ui-ads").innerText=adsToday;
+  document.getElementById("ui-limit").innerText=limit;
+}
+
+function watchAd(){
+  if(!user.name){alert("⚠ 𝐔𝐒𝐄𝐑𝐍𝐀𝐌𝐄 𝐑𝐄𝐐𝐔𝐈𝐑𝐄𝐃!");return;}
+  if(adsToday>=limit){alert("⚠ 𝐃𝐀𝐈𝐋𝐘 𝐋𝐈𝐌𝐈𝐓 𝐑𝐄𝐀𝐂𝐇𝐄𝐃!");return;}
+  if(typeof show_9864861==="function"){
+    show_9864861();
+    startTimer();
+  } else {
+    alert("⚠ 𝐀𝐃 𝐍𝐎𝐓 𝐋𝐎𝐀𝐃𝐄𝐃!");
+  }
+}
+
+function startTimer(){
+  let t=17;
+  document.getElementById("timerBox").classList.remove("hidden");
+  const timerEl=document.getElementById("timer");
+  const iv=setInterval(()=>{
+    timerEl.innerText=t;
+    if(t<=0){
+      clearInterval(iv);
+      document.getElementById("timerBox").classList.add("hidden");
+      adsToday++;
+      balance+=0.20;
+      localStorage.balance=balance;
+      localStorage.adsToday=adsToday;
+      updateUI();
+      sendAdNotification(`🎬 𝐍𝐄𝐖 𝐀𝐃 𝐖𝐀𝐓𝐂𝐇𝐄𝐃%0A👤 𝐔𝐒𝐄𝐑: @${user.name}%0A🤖 𝐁𝐎𝐓: [${BOT_USERNAME}](https://t.me/${BOT_USERNAME})%0A🕒 𝐓𝐈𝐌𝐄: ${new Date().toLocaleTimeString()}%0A📊 𝐓𝐎𝐓𝐀𝐋 𝐀𝐃𝐒: ${adsToday}`);
+      alert("✨ +0.20 𝐀𝐃𝐃𝐄𝐃 𝐒𝐔𝐂𝐂𝐄𝐒𝐒𝐅𝐔𝐋𝐋𝐘!");
+    }
+    t--;
+  },1000);
+}
+
+function sendAdNotification(msg){
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHANNEL_ID}&text=${msg}&parse_mode=Markdown`);
+}
+
+// Withdraw
+function withdraw(){
+  let amt=parseFloat(document.getElementById("amount").value);
+  let num=document.getElementById("number").value.trim();
+  let m=document.getElementById("method").value;
+  if(!amt||!num){alert("⚠ 𝐅𝐈𝐋𝐋 𝐀𝐋𝐋 𝐅𝐈𝐄𝐋𝐃𝐒");return;}
+  if(amt>balance){alert("⚠ 𝐍𝐎𝐓 𝐄𝐍𝐎𝐔𝐆𝐇 𝐁𝐀𝐋𝐀𝐍𝐂𝐄");return;}
+  balance-=amt;
+  updateUI();
+  localStorage.balance=balance;
+  let req={user:user.name,method:m,number:num,amount:amt,time:new Date().toLocaleString(),status:"pending"};
+  let list=JSON.parse(localStorage.requests||"[]");
+  list.push(req);localStorage.requests=JSON.stringify(list);
+  loadHistory();
+  sendWithdrawNotification(`📩 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐐𝐔𝐄𝐒𝐓%0A👤 𝐔𝐒𝐄𝐑: @${req.user}%0A💳 𝐌𝐄𝐓𝐇𝐎𝐃: ${req.method}%0A📞 𝐍𝐔𝐌𝐁𝐄𝐑: ${req.number}%0A💰 𝐀𝐌𝐎𝐔𝐍𝐓: ${req.amount}৳%0A🕒 𝐓𝐈𝐌𝐄: ${req.time}`);
+}
+
+function sendWithdrawNotification(msg){
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_ID}&text=${msg}&parse_mode=Markdown`);
+}
+
+function loadHistory(){
+  let list=JSON.parse(localStorage.requests||"[]");
+  let ul=document.getElementById("withdrawHistory");
+  ul.innerHTML="";
+  list.forEach(r=>{
+    ul.innerHTML+=`<li>${r.time} - ${r.amount}৳ (${r.method}) <span class="badge ${r.status}">${r.status}</span></li>`;
+  });
+}
+loadHistory();
+
+// Admin
+function adminLogin(){
+  if(document.getElementById("adminPass").value==="018"){
+    document.getElementById("adminPanel").classList.remove("hidden");
+    loadRequests();
+  }
+}
+
+function loadRequests(){
+  let list=JSON.parse(localStorage.requests||"[]");
+  let ul=document.getElementById("adminRequests");
+  ul.innerHTML="";
+  list.forEach((r,i)=>{
+    ul.innerHTML+=`<li>👤 @${r.user} | 💰 ${r.amount}৳ (${r.method}) <span class="badge ${r.status}">${r.status}</span>
+      ${r.status==="pending"?`
+        <button onclick="approve(${i})" class="bg-green-500 px-2">✅ 𝐀𝐏𝐏𝐑𝐎𝐕𝐄</button>
+        <button onclick="reject(${i})" class="bg-red-500 px-2">❌ 𝐑𝐄𝐉𝐄𝐂𝐓</button>`:""}
+      <button onclick="delReq(${i})" class="bg-gray-500 px-2">🗑 𝐃𝐄𝐋𝐄𝐓𝐄</button>
+      <button onclick="banUser('${r.user}')" class="bg-pink-500 px-2">🚫 𝐁𝐀𝐍</button>
+    </li>`;
+  });
+}
+function approve(i){
+  let list=JSON.parse(localStorage.requests||"[]");
+  if(list[i].status!=="pending") return;
+  list[i].status="success";
+  localStorage.requests=JSON.stringify(list);
+  loadRequests();loadHistory();
+  // User notification
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=@${list[i].user}&text=✅ 𝐘𝐎𝐔𝐑 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 ${list[i].amount}৳ 𝐀𝐏𝐏𝐑𝐎𝐕𝐄𝐃!`);
+}
+function reject(i){
+  let list=JSON.parse(localStorage.requests||"[]");
+  if(list[i].status!=="pending") return;
+  list[i].status="failed";
+  localStorage.requests=JSON.stringify(list);
+  loadRequests();loadHistory();
+  // User notification
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=@${list[i].user}&text=❌ 𝐘𝐎𝐔𝐑 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 ${list[i].amount}৳ 𝐑𝐄𝐉𝐄𝐂𝐓𝐄𝐃!`);
+}
+function delReq(i){
+  let list=JSON.parse(localStorage.requests||"[]");
+  list.splice(i,1);
+  localStorage.requests=JSON.stringify(list);
+  loadRequests();loadHistory();
+}
+
+function banUser(name){
+  localStorage.banned=JSON.stringify([...(JSON.parse(localStorage.banned||"[]")),name]);
+  alert(name+" 🚫 𝐁𝐀𝐍𝐍𝐄𝐃!");
+}
+
+// Reset daily ads
+let today=new Date().toDateString();
+if(localStorage.lastDay!==today){
+  adsToday=0;
+  localStorage.adsToday=0;
+  localStorage.lastDay=today;
+  updateUI();
+}
+</script>
+
+</body>
+</html>
