@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>💎 𝐒𝐇𝐀𝐑𝐈𝐅 𝐁𝐃 𝐓𝐌 𝐂𝐎𝐌𝐌𝐔𝐍𝐈𝐓𝐘</title>
+  <title>💎 𝑺𝑯𝑨𝑹𝑰𝑭 𝑩𝑫 𝑻𝑴 𝑪𝑶𝑴𝑴𝑼𝑵𝑰𝑻𝒀</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src='//libtl.com/sdk.js' data-zone='9864861' data-sdk='show_9864861'></script>
   <style>
@@ -26,7 +26,7 @@
 <body class="pb-32">
 
 <header class="p-4 text-center glass m-3">
-  <h1 class="text-2xl glow-text">💎 𝐒𝐇𝐀𝐑𝐈𝐅 𝐁𝐃 𝐓𝐌 𝐂𝐎𝐌𝐌𝐔𝐍𝐈𝐓𝐘</h1>
+  <h1 class="text-2xl glow-text">💎 𝑺𝑯𝑨𝑹𝑰𝑭 𝑩𝑫 𝑻𝑴 𝑪𝑶𝑴𝑴𝑼𝑵𝑰𝑻𝒀</h1>
   <a href="https://t.me/SHARIF_BD_TM_COMMUNTTY" target="_blank" class="text-emerald-400 underline text-sm glow-text">📢 𝐉𝐎𝐈𝐍 𝐂𝐇𝐀𝐍𝐍𝐄𝐋</a>
 </header>
 
@@ -59,7 +59,7 @@
     <h2 class="text-xl glow-text">💳 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖</h2>
     <select id="method" class="w-full p-2 mt-2 rounded text-black font-bold italic">
       <option value="bkash">📱 BKASH (𝐌𝐈𝐍𝐈𝐌𝐔𝐌 10)</option>
-      <option value="nagad">📱 NAGAD (𝐌𝐈𝐍𝐈𝐌𝐔𝐌 50)</option>
+      <option value="nagad">📱 NAGAD (𝐌𝐈𝐍𝐈𝐔𝐌 50)</option>
       <option value="recharge">📱 RECHARGE (𝐌𝐈𝐍𝐈𝐌𝐔𝐌 20)</option>
     </select>
     <input id="number" class="w-full p-2 mt-2 rounded text-black font-bold italic" placeholder="📞 𝐍𝐔𝐌𝐁𝐄𝐑"/>
@@ -161,7 +161,7 @@ function startTimer(){
       localStorage.balance=balance;
       localStorage.adsToday=adsToday;
       updateUI();
-      sendAdNotification(`🎬 𝐍𝐄𝐖 𝐀𝐃 𝐖𝐀𝐓𝐂𝐇𝐄𝐃%0A👤 𝐔𝐒𝐄𝐑: @${user.name}%0A🤖 𝐁𝐎𝐓: [${BOT_USERNAME}](https://t.me/${BOT_USERNAME})%0A🕒 𝐓𝐈𝐌𝐄: ${new Date().toLocaleTimeString()}%0A📊 𝐓𝐎𝐓𝐀𝐋 𝐀𝐃𝐒: ${adsToday}`);
+      sendAdNotification(`🎬 𝐍𝐄𝐖 𝐀𝐃 𝐖𝐀𝐓𝐂𝐇𝐄𝐃%0A👤 𝐔𝐒𝐄𝐑: @${user.name}%0A🤖 𝐁𝐎𝐓: [${BOT_USERNAME}](https://t.me/${BOT_USERNAME})%0A📊 𝐓𝐎𝐓𝐀𝐋 𝐀𝐃𝐒: ${adsToday}`);
       alert("✨ +0.20 𝐀𝐃𝐃𝐄𝐃 𝐒𝐔𝐂𝐂𝐄𝐒𝐒𝐅𝐔𝐋𝐋𝐘!");
     }
     t--;
@@ -225,53 +225,39 @@ function loadRequests(){
     </li>`;
   });
 }
-
 function approve(i){
   let list=JSON.parse(localStorage.requests||"[]");
   if(list[i].status!=="pending") return;
   list[i].status="success";
   localStorage.requests=JSON.stringify(list);
   loadRequests();loadHistory();
-  sendUserNotification(list[i].user,
-    `✅ 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐀𝐏𝐏𝐑𝐎𝐕𝐄𝐃!%0A💰 𝐀𝐌𝐎𝐔𝐍𝐓: ${list[i].amount}৳%0A💳 𝐌𝐄𝐓𝐇𝐎𝐃: ${list[i].method}%0A📞 𝐍𝐔𝐌𝐁𝐄𝐑: ${list[i].number}%0A🕒 ${list[i].time}`);
+  sendUserNotification(list[i].user,"✅ 𝐘𝐎𝐔𝐑 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐐𝐔𝐄𝐒𝐓 𝐀𝐏𝐏𝐑𝐎𝐕𝐄𝐃!");
 }
-
 function reject(i){
   let list=JSON.parse(localStorage.requests||"[]");
   if(list[i].status!=="pending") return;
   list[i].status="failed";
   localStorage.requests=JSON.stringify(list);
   loadRequests();loadHistory();
-  sendUserNotification(list[i].user,
-    `❌ 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐉𝐄𝐂𝐓𝐄𝐃!%0A💰 𝐀𝐌𝐎𝐔𝐍𝐓: ${list[i].amount}৳%0A💳 𝐌𝐄𝐓𝐇𝐎𝐃: ${list[i].method}%0A📞 𝐍𝐔𝐌𝐁𝐄𝐑: ${list[i].number}%0A🕒 ${list[i].time}`);
+  sendUserNotification(list[i].user,"❌ 𝐘𝐎𝐔𝐑 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐐𝐔𝐄𝐒𝐓 𝐑𝐄𝐉𝐄𝐂𝐓𝐄𝐃!");
 }
-
 function delReq(i){
   let list=JSON.parse(localStorage.requests||"[]");
   list.splice(i,1);
   localStorage.requests=JSON.stringify(list);
-  loadRequests();loadHistory();
+  loadRequests();
+  loadHistory();
 }
 
-function banUser(name){
-  localStorage.banned=JSON.stringify([...(JSON.parse(localStorage.banned||"[]")),name]);
-  alert(name+" 🚫 𝐁𝐀𝐍𝐍𝐄𝐃!");
+function banUser(u){
+  localStorage.setItem("banned_"+u,"1");
+  alert("🚫 USER @"+u+" BANNED!");
 }
 
-// Reset daily ads
-let today=new Date().toDateString();
-if(localStorage.lastDay!==today){
-  adsToday=0;
-  localStorage.adsToday=0;
-  localStorage.lastDay=today;
-}
-updateUI();
-
-// Send notification to user
-function sendUserNotification(username,msg){
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=@${username}&text=${msg}&parse_mode=Markdown`);
+function sendUserNotification(user,msg){
+  // এখানে শুধু চ্যানেলে যাবে (ইউজার আলাদা নোটিফিকেশন পাবে না কারণ লোকাল ডাটা)
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHANNEL_ID}&text=👤 @${user} → ${msg}`);
 }
 </script>
-
 </body>
 </html>
