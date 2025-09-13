@@ -7,11 +7,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src='//libtl.com/sdk.js' data-zone='9864861' data-sdk='show_9864861'></script>
   <style>
-    body {background:linear-gradient(135deg,#0f172a,#1e293b,#0f172a);color:#fff;min-height:100vh;font-weight:bold;font-style:italic}
-    .glass {background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(12px);border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+    body {
+      background: linear-gradient(135deg,#0f172a,#1e293b,#0f172a);
+      color:#fff;min-height:100vh;
+      font-weight:bold;font-style:italic;
+    }
+    .glass {background: rgba(255,255,255,0.08);border: 1px solid rgba(255,255,255,0.1);backdrop-filter: blur(12px);border-radius: 16px;box-shadow: 0 4px 20px rgba(0,0,0,0.5);}
     .tab{display:none}.tab.show{display:block}
-    .glow-text {font-weight:bold;font-style:italic;text-shadow:0 0 5px #0ff,0 0 10px #0ff,0 0 20px #0ff}
-    .glow-btn {background:linear-gradient(90deg,#ff0080,#7928ca,#2af598);background-size:200% 200%;animation:glow 3s linear infinite;font-weight:bold;font-style:italic;font-size:1.1rem;border-radius:12px;padding:10px}
+    .glow-text {font-weight:bold;font-style:italic;text-shadow:0 0 5px #0ff,0 0 10px #0ff,0 0 20px #0ff;}
+    .glow-btn {background: linear-gradient(90deg,#ff0080,#7928ca,#2af598);background-size:200% 200%;animation: glow 3s linear infinite;font-weight:bold;font-style:italic;font-size:1.1rem;border-radius:12px;padding:10px}
     @keyframes glow {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
     .badge{padding:2px 8px;border-radius:6px;font-size:.8rem;font-weight:bold}
     .badge.pending{background:#fbbf24;color:#000}
@@ -157,7 +161,7 @@ function startTimer(){
       localStorage.balance=balance;
       localStorage.adsToday=adsToday;
       updateUI();
-      sendAdNotification(`🎬 𝐀𝐃 𝐖𝐀𝐓𝐂𝐇𝐄𝐃%0A👤 @${user.name}%0A💰 𝐓𝐎𝐓𝐀𝐋 𝐀𝐃𝐒: ${adsToday}`);
+      sendAdNotification(`🎬 𝐍𝐄𝐖 𝐀𝐃 𝐖𝐀𝐓𝐂𝐇𝐄𝐃%0A👤 𝐔𝐒𝐄𝐑: @${user.name}%0A🤖 𝐁𝐎𝐓: [${BOT_USERNAME}](https://t.me/${BOT_USERNAME})%0A🕒 𝐓𝐈𝐌𝐄: ${new Date().toLocaleTimeString()}%0A📊 𝐓𝐎𝐓𝐀𝐋 𝐀𝐃𝐒: ${adsToday}`);
       alert("✨ +0.20 𝐀𝐃𝐃𝐄𝐃 𝐒𝐔𝐂𝐂𝐄𝐒𝐒𝐅𝐔𝐋𝐋𝐘!");
     }
     t--;
@@ -182,7 +186,7 @@ function withdraw(){
   let list=JSON.parse(localStorage.requests||"[]");
   list.push(req);localStorage.requests=JSON.stringify(list);
   loadHistory();
-  sendWithdrawNotification(`📩 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐐𝐔𝐄𝐒𝐓%0A👤 @${req.user}%0A💳 ${req.method}%0A📞 ${req.number}%0A💰 ${req.amount}৳%0A🕒 ${req.time}`);
+  sendWithdrawNotification(`📩 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐐𝐔𝐄𝐒𝐓%0A👤 𝐔𝐒𝐄𝐑: @${req.user}%0A💳 𝐌𝐄𝐓𝐇𝐎𝐃: ${req.method}%0A📞 𝐍𝐔𝐌𝐁𝐄𝐑: ${req.number}%0A💰 𝐀𝐌𝐎𝐔𝐍𝐓: ${req.amount}৳%0A🕒 𝐓𝐈𝐌𝐄: ${req.time}`);
 }
 
 function sendWithdrawNotification(msg){
@@ -217,25 +221,31 @@ function loadRequests(){
         <button onclick="approve(${i})" class="bg-green-500 px-2">✅ 𝐀𝐏𝐏𝐑𝐎𝐕𝐄</button>
         <button onclick="reject(${i})" class="bg-red-500 px-2">❌ 𝐑𝐄𝐉𝐄𝐂𝐓</button>`:""}
       <button onclick="delReq(${i})" class="bg-gray-500 px-2">🗑 𝐃𝐄𝐋𝐄𝐓𝐄</button>
+      <button onclick="banUser('${r.user}')" class="bg-pink-500 px-2">🚫 𝐁𝐀𝐍</button>
     </li>`;
   });
 }
+
 function approve(i){
   let list=JSON.parse(localStorage.requests||"[]");
   if(list[i].status!=="pending") return;
   list[i].status="success";
   localStorage.requests=JSON.stringify(list);
   loadRequests();loadHistory();
-  sendUserNotification(list[i].user,`✅ 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐀𝐏𝐏𝐑𝐎𝐕𝐄𝐃!%0A💰 ${list[i].amount}৳`);
+  sendUserNotification(list[i].user,
+    `✅ 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐀𝐏𝐏𝐑𝐎𝐕𝐄𝐃!%0A💰 𝐀𝐌𝐎𝐔𝐍𝐓: ${list[i].amount}৳%0A💳 𝐌𝐄𝐓𝐇𝐎𝐃: ${list[i].method}%0A📞 𝐍𝐔𝐌𝐁𝐄𝐑: ${list[i].number}%0A🕒 ${list[i].time}`);
 }
+
 function reject(i){
   let list=JSON.parse(localStorage.requests||"[]");
   if(list[i].status!=="pending") return;
   list[i].status="failed";
   localStorage.requests=JSON.stringify(list);
   loadRequests();loadHistory();
-  sendUserNotification(list[i].user,`❌ 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐉𝐄𝐂𝐓𝐄𝐃!`);
+  sendUserNotification(list[i].user,
+    `❌ 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐉𝐄𝐂𝐓𝐄𝐃!%0A💰 𝐀𝐌𝐎𝐔𝐍𝐓: ${list[i].amount}৳%0A💳 𝐌𝐄𝐓𝐇𝐎𝐃: ${list[i].method}%0A📞 𝐍𝐔𝐌𝐁𝐄𝐑: ${list[i].number}%0A🕒 ${list[i].time}`);
 }
+
 function delReq(i){
   let list=JSON.parse(localStorage.requests||"[]");
   list.splice(i,1);
@@ -243,8 +253,9 @@ function delReq(i){
   loadRequests();loadHistory();
 }
 
-function sendUserNotification(username,msg){
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=@${username}&text=${msg}&parse_mode=Markdown`);
+function banUser(name){
+  localStorage.banned=JSON.stringify([...(JSON.parse(localStorage.banned||"[]")),name]);
+  alert(name+" 🚫 𝐁𝐀𝐍𝐍𝐄𝐃!");
 }
 
 // Reset daily ads
@@ -254,6 +265,13 @@ if(localStorage.lastDay!==today){
   localStorage.adsToday=0;
   localStorage.lastDay=today;
 }
+updateUI();
+
+// Send notification to user
+function sendUserNotification(username,msg){
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=@${username}&text=${msg}&parse_mode=Markdown`);
+}
 </script>
+
 </body>
-</html>
+</html>,
