@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>💎 𝐒𝐇𝐀𝐑𝐈𝐅 𝐁𝐃 𝐓𝐌 𝐂𝐎𝐌𝐌𝐔𝐍𝐈𝐓𝐘</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- AD SDK -->
   <script src='//libtl.com/sdk.js' data-zone='9864861' data-sdk='show_9864861'></script>
   <style>
     body {
@@ -59,9 +58,9 @@
   <section id="tab-withdraw" class="tab glass p-4">
     <h2 class="text-xl glow-text">💳 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖</h2>
     <select id="method" class="w-full p-2 mt-2 rounded text-black font-bold italic">
-      <option value="bkash">📱 BKASH (𝐌𝐈𝐍 10)</option>
-      <option value="nagad">📱 NAGAD (𝐌𝐈𝐍 50)</option>
-      <option value="recharge">📱 RECHARGE (𝐌𝐈𝐍 20)</option>
+      <option value="bkash">📱 BKASH (𝐌𝐈𝐍𝐈𝐌𝐔𝐌 10)</option>
+      <option value="nagad">📱 NAGAD (𝐌𝐈𝐍𝐈𝐌𝐔𝐌 50)</option>
+      <option value="recharge">📱 RECHARGE (𝐌𝐈𝐍𝐈𝐌𝐔𝐌 20)</option>
     </select>
     <input id="number" class="w-full p-2 mt-2 rounded text-black font-bold italic" placeholder="📞 𝐍𝐔𝐌𝐁𝐄𝐑"/>
     <input id="amount" type="number" class="w-full p-2 mt-2 rounded text-black font-bold italic" placeholder="💰 𝐀𝐌𝐎𝐔𝐍𝐓"/>
@@ -226,24 +225,27 @@ function loadRequests(){
     </li>`;
   });
 }
+
 function approve(i){
   let list=JSON.parse(localStorage.requests||"[]");
   if(list[i].status!=="pending") return;
   list[i].status="success";
   localStorage.requests=JSON.stringify(list);
   loadRequests();loadHistory();
-  // User notification
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=@${list[i].user}&text=✅ 𝐘𝐎𝐔𝐑 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 ${list[i].amount}৳ 𝐀𝐏𝐏𝐑𝐎𝐕𝐄𝐃!`);
+  sendUserNotification(list[i].user,
+    `✅ 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐀𝐏𝐏𝐑𝐎𝐕𝐄𝐃!%0A💰 𝐀𝐌𝐎𝐔𝐍𝐓: ${list[i].amount}৳%0A💳 𝐌𝐄𝐓𝐇𝐎𝐃: ${list[i].method}%0A📞 𝐍𝐔𝐌𝐁𝐄𝐑: ${list[i].number}%0A🕒 ${list[i].time}`);
 }
+
 function reject(i){
   let list=JSON.parse(localStorage.requests||"[]");
   if(list[i].status!=="pending") return;
   list[i].status="failed";
   localStorage.requests=JSON.stringify(list);
   loadRequests();loadHistory();
-  // User notification
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=@${list[i].user}&text=❌ 𝐘𝐎𝐔𝐑 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 ${list[i].amount}৳ 𝐑𝐄𝐉𝐄𝐂𝐓𝐄𝐃!`);
+  sendUserNotification(list[i].user,
+    `❌ 𝐖𝐈𝐓𝐇𝐃𝐑𝐀𝐖 𝐑𝐄𝐉𝐄𝐂𝐓𝐄𝐃!%0A💰 𝐀𝐌𝐎𝐔𝐍𝐓: ${list[i].amount}৳%0A💳 𝐌𝐄𝐓𝐇𝐎𝐃: ${list[i].method}%0A📞 𝐍𝐔𝐌𝐁𝐄𝐑: ${list[i].number}%0A🕒 ${list[i].time}`);
 }
+
 function delReq(i){
   let list=JSON.parse(localStorage.requests||"[]");
   list.splice(i,1);
@@ -262,7 +264,12 @@ if(localStorage.lastDay!==today){
   adsToday=0;
   localStorage.adsToday=0;
   localStorage.lastDay=today;
-  updateUI();
+}
+updateUI();
+
+// Send notification to user
+function sendUserNotification(username,msg){
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=@${username}&text=${msg}&parse_mode=Markdown`);
 }
 </script>
 
